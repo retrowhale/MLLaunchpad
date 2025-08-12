@@ -53,18 +53,20 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 1rem; /* Adjusted gap for more links */
+            gap: 0.5rem; /* Adjusted for more links */
             flex-wrap: wrap;
             align-items: center;
+            justify-content: center;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
             transition: color 0.3s ease;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 0.9rem;
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -195,7 +197,7 @@
             transform: translateY(-5px);
         }
 
-        .card h3 {
+        .card h3, .card h5 {
             color: #2c3e50;
             margin-bottom: 1rem;
         }
@@ -229,131 +231,49 @@
             margin: 1.5rem 0;
             box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
         }
-
-        /* Formula styling */
-        .formula {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1rem 0;
-            font-family: 'Times New Roman', serif;
+        
+        /* Accordion for solutions */
+        .accordion-button {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
             font-size: 1.2rem;
-            text-align: center;
-            border-left: 4px solid #e74c3c;
-        }
-        
-        /* Modal Styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 2000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 30px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 15px;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: fadeIn 0.3s;
-        }
-
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            line-height: 1;
-        }
-
-        .close-btn:hover,
-        .close-btn:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Form Styles inside Modal */
-        .modal-content h2 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            border-bottom: none;
-            font-size: 2rem;
-            background: none;
-            -webkit-text-fill-color: #2c3e50;
-        }
-        
-        .modal-content form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .modal-content .cta-button {
-            width: 100%;
+            transition: 0.4s;
+            border-radius: 8px;
             margin-top: 1rem;
-            margin-bottom: 0.5rem;
+            font-weight: bold;
         }
 
-        .secondary-button {
-            background: #ecf0f1;
-            color: #34495e;
-            padding: 0.8rem 2rem;
-            border: 1px solid #bdc3c7;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin: 0.5rem 0 0 0;
-            width: 100%;
+        .accordion-button:hover {
+            background-color: #d0e3ff;
         }
 
-        .secondary-button:hover {
-            background: #d5dbdb;
+        .accordion-panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            border: 1px solid #e7f1ff;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
         }
-
 
         /* Responsive */
-        @media (max-width: 992px) {
+        @media (max-width: 1100px) {
             .nav-links {
-                gap: 0.5rem;
-                justify-content: center;
+                gap: 0.2rem;
                 width: 100%;
                 margin-top: 1rem;
             }
              .nav-links a {
                 padding: 0.4rem 0.6rem;
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
         }
         @media (max-width: 768px) {
@@ -369,257 +289,168 @@
 <body>
     <header>
         <nav class="container">
-            <a href="#" class="logo" onclick="showPage('home', this)">🚀 ML Test Launchpad</a>
+            <a href="#" class="logo" onclick="showPage('home', this)">🚀 ML Launchpad</a>
             <ul class="nav-links">
                 <li><a href="#" onclick="showPage('home', this)" class="active">Home</a></li>
-                <li><a href="#" onclick="showPage('overview', this)">Overview</a></li>
                 <li><a href="#" onclick="showPage('python-basics', this)">Python</a></li>
-                <li><a href="#" onclick="showPage('libraries', this)">Libraries</a></li>
                 <li><a href="#" onclick="showPage('data-prep', this)">Data Prep</a></li>
-                <li><a href="#" onclick="showPage('regression', this)">Regression</a></li>
-                <li><a href="#" onclick="showPage('regression-exercise', this)">Regression Ex.</a></li>
+                <li><a href="#" onclick="showPage('regression-exercise', this)">Regression</a></li>
                 <li><a href="#" onclick="showPage('decision-trees', this)">Trees</a></li>
                 <li><a href="#" onclick="showPage('knn', this)">k-NN</a></li>
-                <li><a href="#" onclick="showPage('lab-exercise', this)" style="background: #e74c3c; border-radius: 5px;">Exercise</a></li>
-                <li><a href="#" id="login-btn">Login</a></li>
+                <li><a href="#" onclick="showPage('ensemble', this)">Ensemble</a></li>
+                <li><a href="#" onclick="showPage('neural-networks', this)">NN/Keras</a></li>
+                <li><a href="#" onclick="showPage('evaluation', this)">Evaluation</a></li>
+                <li><a href="#" onclick="showPage('unsupervised', this)">Unsupervised</a></li>
+                <li><a href="#" onclick="showPage('lab-exercise', this)" style="background: #e74c3c;">Churn Lab</a></li>
+                <li><a href="#" onclick="showPage('advanced-exercise', this)" style="background: #e74c3c;">Adv. Exercises</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="container">
-        <!-- All page content remains the same -->
         <!-- Page 1: Homepage -->
         <div id="home" class="page active">
-              <h1>Welcome to the Python Test Machine Learning Launchpad</h1>
+            <h1>Welcome to the Machine Learning Launchpad</h1>
             <div class="highlight-box">
                 <h2>🎯 Your Journey Starts Here</h2>
-                <p>Welcome to the exciting world of machine learning with Python! Whether you're a curious developer, aspiring data scientist, or someone who's always wondered how computers learn, you've come to the right place. This comprehensive launchpad will take you from Python fundamentals to building your first intelligent models.</p>
+                <p>This comprehensive launchpad will take you from Python fundamentals to building advanced, intelligent models. Explore key concepts, work through practical examples, and master the skills needed for modern data science.</p>
             </div>
             <h2>🌟 What You'll Learn</h2>
             <div class="card-grid">
                 <div class="card"><h3>🐍 Python Mastery</h3><p>Go from Python basics to advanced data manipulation with essential libraries like NumPy, Pandas, and Matplotlib.</p></div>
-                <div class="card"><h3>🧠 ML Foundations</h3><p>Understand the theory behind key algorithms and learn when to use each approach for different problems.</p></div>
+                <div class="card"><h3>🧠 ML Foundations</h3><p>Understand the theory behind key algorithms, from simple regression to complex neural networks.</p></div>
                 <div class="card"><h3>🔧 Hands-On Projects</h3><p>Build real machine learning models with step-by-step guidance and runnable code examples.</p></div>
-                <div class="card"><h3>📊 Data Science Skills</h3><p>Learn data exploration, preprocessing, and visualization techniques used by professional data scientists.</p></div>
+                <div class="card"><h3>📊 Advanced Techniques</h3><p>Dive into ensemble methods, deep learning, and robust model evaluation to build high-performance models.</p></div>
             </div>
-            <h2>👥 Who Is This For?</h2>
-            <p>This course is designed for aspiring data analysts, developers looking to add ML to their skillset, students exploring career opportunities, and curious minds who want to understand how intelligent systems work. We assume you have some basic programming knowledge but are new to the world of machine learning.</p>
-            <h2>🗺️ Your Learning Path</h2>
-            <p>Our website is carefully structured to guide you through a logical learning progression. You'll start with foundational concepts and Python essentials, then dive into data preparation and exploration, before finally building and understanding different types of machine learning algorithms. Each section builds upon the previous one, creating a solid foundation for your ML journey.</p>
-            <div style="text-align: center; margin-top: 3rem;"><a href="#" onclick="showPage('overview', this)" class="cta-button">🚀 Start Your Learning Journey</a></div>
+            <div style="text-align: center; margin-top: 3rem;"><a href="#" onclick="showPage('python-basics', this)" class="cta-button">🚀 Get Started with Python</a></div>
         </div>
 
-        <!-- Page 2: Course & ML Overview -->
-        <div id="overview" class="page">
-            <h1>Getting Started: Course and Machine Learning Overview</h1>
-            <h2>📚 Course Overview</h2>
-            <p>This course is designed to provide you with a solid, practical foundation in machine learning using Python. You'll learn not just how to use ML algorithms, but understand the principles behind them, enabling you to make informed decisions about which approach to use for different problems.</p>
-            <div class="highlight-box">
-                <h3>🛤️ Learning Roadmap</h3>
-                <p><strong>Foundation:</strong> Python Basics → Data Libraries → Data Preparation</p>
-                <p><strong>Core ML:</strong> Supervised Learning (Regression, Classification) → Model Evaluation</p>
-                <p><strong>Algorithms:</strong> Linear Regression → Decision Trees → k-Nearest Neighbors</p>
-            </div>
-            <h2>🤖 What is Machine Learning?</h2>
-            <p>Machine learning is like teaching a computer to learn from experience, similar to how humans learn patterns and make decisions. Instead of programming explicit rules, we feed the computer data and let it discover patterns on its own. The core idea is that algorithms can automatically learn patterns from data to make predictions or decisions without being explicitly programmed for every scenario.</p>
-            <h2>🎯 Types of Machine Learning</h2>
-            <div class="card-grid">
-                <div class="card"><h3>📖 Supervised Learning</h3><p><strong>Learning from labeled data</strong> - like a student learning with an answer key. Example: Predicting house prices based on historical data. Keywords: Labeled data, prediction, classification</p></div>
-                <div class="card"><h3>🔍 Unsupervised Learning</h3><p><strong>Finding hidden patterns</strong> in unlabeled data - like a detective finding clues. Example: Grouping customers into different segments. Keywords: Unlabeled data, clustering, pattern discovery</p></div>
-                <div class="card"><h3>🎮 Reinforcement Learning</h3><p><strong>Learning through trial and error</strong> - an agent learning by receiving rewards or penalties. Example: Training an AI to play a game. Keywords: Agent, environment, rewards, policy</p></div>
-            </div>
-        </div>
-
-        <!-- Page 3: Python Programming Basics -->
+        <!-- Page 2: Python Essentials -->
         <div id="python-basics" class="page">
-            <h1>Python Essentials for Machine Learning</h1>
-            <h2>🐍 Why Python for Machine Learning?</h2>
-            <p>Python's simplicity, readability, and extensive ecosystem of libraries make it the language of choice for ML.</p>
-            <h2>📊 Data Types, Variables, and Control Flow</h2>
-            <h3>Data Types and Variables</h3>
-            <div class="code-block"><pre>age = 25              # Integer
-height = 5.9          # Float
-name = "Alice"        # String
-is_student = True     # Boolean</pre></div>
-            <h3>Control Flow</h3>
-            <div class="code-block"><pre># If-elif-else
-score = 85
-if score >= 90: grade = "A"
-elif score >= 80: grade = "B"
-else: grade = "C"
-print(f"Grade: {grade}")
+            <h1>🐍 Python Essentials for Machine Learning</h1>
+            <p>A quick refresher on the Python fundamentals and the core data science libraries.</p>
+            <h2>The Data Science Toolkit: Key Libraries</h2>
+            <p>These are the essential libraries you will import at the start of almost every machine learning project.</p>
+            <div class="code-block"><pre># Core libraries for data handling and deep learning
+import numpy as np
+import pandas as pd
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
 
-# For loop
-for i in range(3): print(f"Iteration {i}")</pre></div>
-            <h2>🔧 Functions and Error Handling</h2>
-            <h3>Functions</h3>
-            <div class="code-block"><pre>def greet(name):
-    return f"Hello, {name}!"
-print(greet("World"))</pre></div>
-            <h3>Error Handling</h3>
-            <div class="code-block"><pre>try:
-    result = 10 / 0
-except ZeroDivisionError:
-    print("Cannot divide by zero!")</pre></div>
+# Visualization
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Scikit-Learn for classical ML models and tools
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
+
+# Imbalanced-Learn for handling imbalanced datasets
+from imblearn.over_sampling import SMOTE</pre></div>
+
+            <div class="card-grid">
+                <div class="card"><h5>NumPy</h5><p>The fundamental package for numerical computing in Python. It provides support for large, multi-dimensional arrays and matrices, along with a collection of mathematical functions to operate on these arrays.</p></div>
+                <div class="card"><h5>Pandas</h5><p>The primary tool for data manipulation and analysis. It introduces the <strong>DataFrame</strong>, a powerful and flexible data structure for handling tabular data (like spreadsheets or SQL tables).</p></div>
+                <div class="card"><h5>Matplotlib & Seaborn</h5><p>The standard libraries for data visualization. <strong>Matplotlib</strong> provides the basic, low-level plotting framework, while <strong>Seaborn</strong> is built on top of it to create more attractive and informative statistical graphics.</p></div>
+                <div class="card"><h5>TensorFlow & Keras</h5><p><strong>TensorFlow</strong> is a comprehensive platform for large-scale machine learning. <strong>Keras</strong> is its user-friendly, high-level API for building and training neural networks with ease.</p></div>
+                <div class="card"><h5>Scikit-Learn (sklearn)</h5><p>The go-to library for classical machine learning. It provides a vast collection of tools for data preprocessing, a wide range of algorithms (like Logistic Regression, Decision Trees, Random Forests), and robust metrics for model evaluation.</p></div>
+                <div class="card"><h5>Imbalanced-Learn (imblearn)</h5><p>A specialized library for dealing with imbalanced datasets. It offers techniques like <strong>SMOTE</strong> (Synthetic Minority Over-sampling Technique) to create synthetic samples of the minority class, helping to prevent models from becoming biased towards the majority class.</p></div>
+            </div>
         </div>
 
-        <!-- Page 4: Python Analytic Libraries -->
-        <div id="libraries" class="page">
-            <h1>The Data Scientist's Toolkit: NumPy, Pandas, and Matplotlib</h1>
-            <h2>🔢 NumPy: Numerical Python</h2>
-            <p>NumPy is the foundation for numerical computing, providing fast and efficient array operations.</p>
-            <div class="code-block"><pre>import numpy as np
-arr = np.array([1, 2, 3])
-print(arr * 2) # Output: [2 4 6]</pre></div>
-            <h2>🐼 Pandas: Data Analysis Library</h2>
-            <p>Pandas is your go-to library for data manipulation, introducing the powerful DataFrame.</p>
-            <div class="code-block"><pre>import pandas as pd
-data = {'Name': ['Alice', 'Bob'], 'Age': [25, 30]}
-df = pd.DataFrame(data)
-print(df.describe())</pre></div>
-            <h2>📊 Matplotlib/Seaborn: Data Visualization</h2>
-            <p>Visualization is crucial for understanding data. Matplotlib is the foundation, and Seaborn makes creating beautiful statistical plots easy.</p>
-            <div class="code-block"><pre>import matplotlib.pyplot as plt
-plt.plot([1, 2, 3], [1, 4, 9])
-# In a real script, you would use plt.show() to display the plot.
-</pre></div>
-        </div>
-
-        <!-- Page 5: Data Exploration and Preprocessing -->
+        <!-- Page 3: Data Exploration and Preprocessing -->
         <div id="data-prep" class="page">
             <h1>Preparing Your Data for Machine Learning</h1>
+            <p>Garbage in, garbage out. The quality of your data preparation directly determines the quality of your model. This is often the most time-consuming but critical phase of any ML project.</p>
+            
+            <h2>🔍 Exploratory Data Analysis (EDA)</h2>
+            <p>Before you preprocess, you must explore. EDA involves using visualizations and summary statistics to understand your data's structure, identify outliers, and discover underlying patterns. Tools like Matplotlib and Seaborn are essential for this.</p>
+            
             <h2>🧹 Data Cleaning</h2>
-            <p>Real-world data is messy. We need to handle missing values and outliers.</p>
-            <div class="code-block"><pre># Filling missing values
+            <p>Real-world data is messy. Cleaning involves handling issues like missing values and outliers that can negatively impact model performance.</p>
+            <div class="code-block"><pre># Filling missing values in a column with its median
 median_age = df['age'].median()
 df['age'].fillna(median_age, inplace=True)</pre></div>
+
+            <h2>⚖️ Feature Scaling</h2>
+            <p>Many algorithms, especially those based on distance (like k-NN and SVMs), are sensitive to the scale of features. If one feature (e.g., salary) has a much larger range than another (e.g., years of experience), it will dominate the distance calculations. Scaling brings all features to a similar magnitude.</p>
+            <div class="code-block"><pre>from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_numerical_features)</pre></div>
+
+            <h2>🏷️ Encoding Categorical Data</h2>
+            <p>Machine learning models require numerical input. Categorical features (like "Country" or "Color") must be converted into numbers. A common method is <strong>One-Hot Encoding</strong>, which creates a new binary column for each category.</p>
+            <div class="code-block"><pre>from sklearn.preprocessing import OneHotEncoder
+
+# This will create new columns like 'Color_Red', 'Color_Blue', etc.
+encoder = OneHotEncoder()
+X_categorical_encoded = encoder.fit_transform(X_categorical_features)</pre></div>
+
             <h2>🔪 Train/Test Split</h2>
-            <div class="warning-box"><h3>🚨 Critical Step: Train/Test Split</h3><p>We must evaluate our model on data it has never seen before to see how it will perform in the real world.</p></div>
+            <div class="warning-box"><h3>🚨 Critical Step: Train/Test Split</h3><p>We must evaluate our model on data it has never seen before to get an unbiased estimate of its real-world performance. This prevents <strong>overfitting</strong>, where a model memorizes the training data but fails to generalize to new data.</p></div>
             <div class="code-block"><pre>from sklearn.model_selection import train_test_split
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</pre></div>
         </div>
         
-        <!-- Page 6: Linear Regression -->
-        <div id="regression" class="page">
-            <h1>Error-Based Learning: Linear Regression</h1>
-            <p>Regression models predict a continuous value (e.g., price). Linear Regression finds the "line of best fit" through the data.</p>
-            <div class="code-block"><pre>from sklearn.linear_model import LinearRegression
-model = LinearRegression()
-model.fit(X_train, y_train)
-predictions = model.predict(X_test)</pre></div>
-            <h2>⚖️ Error Metrics for Regression</h2>
-            <p>We measure error to see how good our model is. Common metrics include Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).</p>
-            <div class="code-block"><pre>from sklearn.metrics import mean_squared_error
-rmse = mean_squared_error(y_test, predictions, squared=False)
-print(f"RMSE: {rmse:.2f}")</pre></div>
-        </div>
-        
-        <!-- Basic Regression Exercise -->
+        <!-- Page 4: Basic Regression Exercise -->
         <div id="regression-exercise" class="page">
             <h1>Exercise: Predicting Scores with Linear Regression</h1>
-            
             <h2>1. Goal</h2>
-            <p>This exercise provides a simple, step-by-step introduction to linear regression. You will build a model that predicts a student's exam score based on the number of hours they studied. This is a classic example of "error-based" supervised learning.</p>
-            
-            <h2>2. The Problem</h2>
-            <p>We have data on how many hours students studied and their corresponding exam scores. Our goal is to train a model that can predict the exam score for a new student, given the hours they plan to study.</p>
-
+            <p>You will build a model that predicts a student's exam score based on the number of hours they studied. This is a classic example of "error-based" supervised learning.</p>
             <h2>3. Step-by-Step Procedure</h2>
-
-            <h3>Step 1: Import Libraries</h3>
-            <p>Start by importing the necessary libraries.</p>
+            <h3>Step 1: Import Libraries & Create Data</h3>
             <div class="code-block"><pre>import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error</pre></div>
+from sklearn.metrics import mean_squared_error
 
-            <h3>Step 2: Create and Visualize the Data</h3>
-            <p>We'll create some simple, synthetic data and visualize it to see the relationship.</p>
-            <div class="code-block"><pre># Create synthetic data
+# Create synthetic data
 np.random.seed(0)
 hours_studied = np.random.rand(50, 1) * 10
 exam_score = 50 + 5 * hours_studied + np.random.randn(50, 1) * 5
-
-# Create a DataFrame
-df = pd.DataFrame({'Hours_Studied': hours_studied.flatten(), 'Exam_Score': exam_score.flatten()})
-
-# Visualize the data
-plt.figure(figsize=(8, 6))
-plt.scatter(df['Hours_Studied'], df['Exam_Score'])
-plt.title('Exam Score vs. Hours Studied')
-plt.xlabel('Hours Studied')
-plt.ylabel('Exam Score')
-plt.grid(True)
-# In a real script, use plt.show()
-</pre></div>
-            <p><strong>Question:</strong> Does there appear to be a relationship between hours studied and exam score?</p>
-
-            <h3>Step 3: Define Features (X) and Target (y)</h3>
-            <p>Separate the data into our input feature (X) and the value we want to predict (y).</p>
+df = pd.DataFrame({'Hours_Studied': hours_studied.flatten(), 'Exam_Score': exam_score.flatten()})</pre></div>
+            <h3>Step 2: Define Features, Split Data, and Train Model</h3>
             <div class="code-block"><pre>X = df[['Hours_Studied']]
-y = df['Exam_Score']</pre></div>
-
-            <h3>Step 4: Split Data into Training and Testing Sets</h3>
-            <p>We'll use 80% of the data for training our model and 20% for testing its performance.</p>
-            <div class="code-block"><pre>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)</pre></div>
-            
-            <h3>Step 5: Train the Linear Regression Model</h3>
-            <p>Now, we create an instance of the `LinearRegression` model and fit it to our training data.</p>
-            <div class="code-block"><pre>model = LinearRegression()
-model.fit(X_train, y_train)
-print("Model trained successfully!")</pre></div>
-
-            <h3>Step 6: Make Predictions and Evaluate the Model</h3>
-            <p>Let's use our trained model to make predictions on the test data and see how well it did.</p>
-            <div class="code-block"><pre># Make predictions on the test set
-y_pred = model.predict(X_test)
-
-# Calculate error metrics
-mae = mean_absolute_error(y_test, y_pred)
+y = df['Exam_Score']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = LinearRegression()
+model.fit(X_train, y_train)</pre></div>
+            <h3>Step 3: Evaluate the Model</h3>
+            <div class="code-block"><pre>y_pred = model.predict(X_test)
 rmse = mean_squared_error(y_test, y_pred, squared=False)
-
-print(f"Mean Absolute Error (MAE): {mae:.2f}")
 print(f"Root Mean Squared Error (RMSE): {rmse:.2f}")</pre></div>
-
-            <h3>Step 7: Visualize the Results</h3>
-            <p>A great way to see our model's performance is to plot the "line of best fit" over the test data.</p>
-            <div class="code-block"><pre>plt.figure(figsize=(8, 6))
-plt.scatter(X_test, y_test, color='blue', label='Actual Scores')
-plt.plot(X_test, y_pred, color='red', linewidth=2, label='Predicted Line')
-plt.title('Model Prediction vs. Actual Data')
-plt.xlabel('Hours Studied')
-plt.ylabel('Exam Score')
-plt.legend()
-plt.grid(True)
-# In a real script, use plt.show()
-</pre></div>
-
             <h2>4. Interpretation and Questions</h2>
             <ul>
-                <li><strong>The Regression Line:</strong> What does the red line in the final plot represent?</li>
-                <li><strong>Model Error:</strong> The Mean Absolute Error (MAE) was calculated. In simple terms, what does this value tell you about the model's average prediction error? For example, if the MAE is 5, it means the model's predictions are, on average, off by 5 points.</li>
-                <li><strong>Making a Prediction:</strong> If a new student studies for 7 hours, what score would our model predict? (You can use `model.predict([[7]])` to find out).</li>
+                <li><strong>The Regression Line:</strong> What does the line of best fit represent?</li>
+                <li><strong>Model Error:</strong> What does the RMSE value tell you about the model's average prediction error?</li>
             </ul>
         </div>
-        
-        <!-- Page 7: Decision Trees -->
+
+        <!-- Page 5: Decision Trees -->
         <div id="decision-trees" class="page">
-            <h1>Information-Based Learning: Decision Trees</h1>
-            <p>Decision Trees make predictions by learning a series of if-then-else questions, forming a tree-like structure. They are great for classification.</p>
-            <h2>🍃 Entropy and Information Gain</h2>
-            <p>The tree decides which question to ask by picking the one that provides the most "information gain"—the one that best splits the data into pure groups.</p>
+            <h1>🌳 Information-Based Learning: Decision Trees</h1>
+            <p>Decision Trees make predictions by learning a series of if-then-else questions based on the features, forming a tree-like structure. They are highly interpretable and can be used for both classification and regression.</p>
+            <h2>🍃 How They Work: Entropy and Information Gain</h2>
+            <p>The tree decides which feature to split on at each node by picking the one that provides the most "information gain." Information gain measures how much a split reduces the uncertainty (or "entropy") in the data. The goal is to create splits that result in "pure" nodes, where the data points in each node belong to a single class.</p>
             <div class="code-block"><pre>from sklearn.tree import DecisionTreeClassifier
-tree_clf = DecisionTreeClassifier(max_depth=3)
-tree_clf.fit(X, y)</pre></div>
+
+# 'max_depth' is a key hyperparameter to prevent overfitting
+tree_clf = DecisionTreeClassifier(max_depth=3, random_state=42)
+tree_clf.fit(X_train, y_train)</pre></div>
         </div>
         
-        <!-- Page 8: k-Nearest Neighbors (k-NN) -->
+        <!-- Page 6: k-Nearest Neighbors (k-NN) -->
         <div id="knn" class="page">
-            <h1>Similarity-Based Learning: k-Nearest Neighbors (k-NN)</h1>
-            <p>k-NN classifies a new data point based on the majority class of its 'k' closest neighbors. It's simple and intuitive.</p>
-            <div class="warning-box"><h3>🚨 The Importance of Feature Scaling</h3><p>k-NN relies on distance, so features with large ranges can dominate those with small ranges. It is <strong>critical</strong> to scale your data before applying k-NN.</p></div>
+            <h1>🤝 Similarity-Based Learning: k-Nearest Neighbors (k-NN)</h1>
+            <p>k-NN classifies a new data point based on the majority class of its 'k' closest neighbors in the feature space. It's simple, intuitive, and powerful.</p>
+            <div class="warning-box"><h3>🚨 The Importance of Feature Scaling</h3><p>k-NN relies on distance, so features with large ranges can dominate those with small ranges. It is <strong>critical</strong> to scale your data before applying k-NN using a tool like `StandardScaler`.</p></div>
             <div class="code-block"><pre>from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -630,226 +461,290 @@ X_test_scaled = scaler.transform(X_test)
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X_train_scaled, y_train)</pre></div>
         </div>
-        
-        <!-- Page 9: Lab Exercise (MODIFIED) -->
+
+        <!-- Page 7: Ensemble Methods -->
+        <div id="ensemble" class="page">
+            <h1>🌳 Ensemble Methods: The Power of Many</h1>
+            <h2>Boosting Explained</h2>
+            <p>Boosting is an ensemble technique that combines multiple simple models (weak learners) to create a single, powerful predictive model. It works sequentially, with each new model focusing on correcting the errors made by the previous one. This iterative approach makes it highly effective.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h5>AdaBoost (Adaptive Boosting)</h5>
+                    <p>Focuses on misclassified instances by increasing their weights in subsequent iterations. This forces the next weak learner to pay more attention to the "hard" examples that the previous one got wrong.</p>
+                </div>
+                <div class="card">
+                    <h5>Gradient Boosting</h5>
+                    <p>A more generalized approach where each new model predicts the residuals (the errors) of the previous model. By continuously adding models that correct the previous errors, the overall model becomes highly accurate.</p>
+                </div>
+            </div>
+             <h3>Hyperparameter Tuning</h3>
+            <p>Boosting models have key hyperparameters like `n_estimators` (number of trees), `learning_rate` (how much each tree contributes), and `max_depth` (complexity of each tree). Using `GridSearchCV` helps find the optimal combination of these parameters to maximize performance.</p>
+        </div>
+
+        <!-- Page 8: Neural Networks -->
+        <div id="neural-networks" class="page">
+            <h1>🧠 Deep Learning with Neural Networks</h1>
+            <h2>Building a Neural Network with Keras</h2>
+            <p>Neural networks, the core of deep learning, are inspired by the human brain. Building one with a framework like Keras involves stacking layers. Below is a simple architecture for image classification.</p>
+            <h3>Key Layers in a CNN</h3>
+            <ul>
+                <li><strong>Conv2D:</strong> A convolutional layer that acts as a feature detector, scanning the image to find patterns like edges, corners, and textures.</li>
+                <li><strong>MaxPooling2D:</strong> A pooling layer that reduces the spatial dimensions (down-sampling) of the feature map, making the model more efficient and robust to variations in the position of features.</li>
+                <li><strong>Flatten:</strong> Converts the 2D feature maps into a 1D vector, preparing the data to be fed into the fully-connected dense layers.</li>
+                <li><strong>Dense:</strong> A standard, fully-connected neural network layer where each neuron is connected to every neuron in the previous layer.</li>
+                <li><strong>Activation Functions:</strong> 'relu' is commonly used in hidden layers to introduce non-linearity, while 'softmax' is used in the output layer for multi-class classification to convert outputs into probabilities.</li>
+            </ul>
+            <div class="code-block"><pre>import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
+model = keras.Sequential([
+    keras.Input(shape=(32, 32, 3)),
+    layers.Conv2D(32, (3, 3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(10, activation='softmax')
+])</pre></div>
+        </div>
+
+        <!-- Page 9: Model Evaluation -->
+        <div id="evaluation" class="page">
+            <h1>📊 Robust Model Evaluation</h1>
+            <p>A model is only as good as its evaluation. Choosing the right metrics is key to understanding its true performance, especially when dealing with real-world problems where errors have different costs.</p>
+            
+            <h2>The Confusion Matrix</h2>
+            <p>This is the foundation for most classification metrics. It's a table that summarizes how a classification model performed by showing the counts of correct and incorrect predictions for each class.</p>
+            <ul>
+                <li><strong>True Positives (TP):</strong> The model correctly predicted the positive class. (e.g., correctly identified a fraudulent transaction).</li>
+                <li><strong>True Negatives (TN):</strong> The model correctly predicted the negative class. (e.g., correctly identified a legitimate transaction).</li>
+                <li><strong>False Positives (FP):</strong> The model incorrectly predicted the positive class. (e.g., flagged a legitimate transaction as fraud - a "false alarm").</li>
+                <li><strong>False Negatives (FN):</strong> The model incorrectly predicted the negative class. (e.g., missed a fraudulent transaction - a very costly error!).</li>
+            </ul>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h5>Precision: The Accuracy of Positive Predictions</h5>
+                    <p><strong>Question it answers:</strong> "Out of all the times the model predicted 'Positive', how often was it correct?"</p>
+                    <p><strong>Formula:</strong> `TP / (TP + FP)`</p>
+                    <p><strong>Use when:</strong> The cost of a False Positive is high. For example, in email spam detection, you want high precision to avoid classifying important emails as spam.</p>
+                </div>
+                <div class="card">
+                    <h5>Recall: The Ability to Find All Positives</h5>
+                    <p><strong>Question it answers:</strong> "Out of all the actual 'Positive' cases, how many did the model find?"</p>
+                    <p><strong>Formula:</strong> `TP / (TP + FN)`</p>
+                    <p><strong>Use when:</strong> The cost of a False Negative is high. For example, in medical diagnoses for a serious disease, you want high recall to minimize the risk of missing a case.</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>The Precision-Recall Trade-off & The F1-Score</h3>
+                <p>Often, increasing precision will decrease recall, and vice-versa. The <strong>F1-Score</strong> is the harmonic mean of Precision and Recall, providing a single metric that balances both. It's especially useful for imbalanced datasets where you care about finding the minority class.</p>
+                <p><strong>Formula:</strong> `2 * (Precision * Recall) / (Precision + Recall)`</p>
+            </div>
+        </div>
+
+        <!-- Page 10: Unsupervised Learning -->
+        <div id="unsupervised" class="page">
+            <h1>📉 Unsupervised Learning & Dimensionality Reduction</h1>
+            <p>Discovering patterns in data without predefined labels.</p>
+            <div class="card-grid">
+                <div class="card">
+                    <h5>Clustering with K-Means</h5>
+                    <p>K-Means is a popular clustering algorithm that aims to partition 'n' observations into 'k' clusters. It works by assigning each data point to the nearest cluster center (centroid) and then recalculating the centroids based on the new assignments, iterating until the assignments no longer change.</p>
+                </div>
+                <div class="card">
+                    <h5>Principal Component Analysis (PCA)</h5>
+                    <p>PCA is a technique for dimensionality reduction. It transforms a large set of correlated variables into a smaller set of uncorrelated variables called "principal components" while retaining most of the original information. The first principal component captures the most variance in the data, the second captures the next most, and so on.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 11: Lab Exercise (k-NN) -->
         <div id="lab-exercise" class="page">
-             <h1>Lab Exercise: Predicting Customer Churn with k-NN</h1>
-
-             <h2>1. Learning Goals</h2>
-             <p>Welcome! In this lab, you'll apply your skills to a common business problem: predicting customer churn. By the end, you will be able to:</p>
-             <ul>
-                 <li>Create and inspect a realistic, synthetic dataset.</li>
-                 <li>Perform essential data cleaning and preprocessing.</li>
-                 <li>Implement, train, and evaluate a k-Nearest Neighbors (k-NN) classification model.</li>
-                 <li>Interpret a confusion matrix and classification report to understand model performance.</li>
-                 <li>Find the optimal value for 'k' to improve your model.</li>
-             </ul>
-
-             <h2>2. Background</h2>
-             <p><strong>The Problem: Customer Churn.</strong> Customer churn is when a customer stops doing business with a company. Predicting which customers are likely to churn is a valuable task, as it allows a company to proactively offer incentives to keep them.</p>
-             <p><strong>The Dataset.</strong> We will create a synthetic dataset of telecom customers. Our goal is to predict whether a customer will churn ('Yes' or 'No') based on features like their account tenure, monthly bill, and total charges.</p>
-
-             <h2>3. Lab Procedure: Step-by-Step</h2>
-             
-             <h3>Step 1: Setup and Library Imports</h3>
-             <p>First, import the necessary libraries for data science and machine learning.</p>
-             <div class="code-block"><pre>import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
+            <h1>Lab Exercise: Predicting Customer Churn with k-NN</h1>
+            <h2>1. Learning Goals</h2>
+            <ul>
+                <li>Create and inspect a realistic, synthetic dataset.</li>
+                <li>Perform essential data cleaning and preprocessing.</li>
+                <li>Implement, train, and evaluate a k-Nearest Neighbors (k-NN) classification model.</li>
+                <li>Interpret a confusion matrix and find the optimal value for 'k'.</li>
+            </ul>
+            <h2>2. Background</h2>
+            <p><strong>The Problem:</strong> Predicting which customers are likely to churn (stop using a service) is a valuable task. Our goal is to predict churn based on features like account tenure and monthly bill.</p>
+            <h2>3. Lab Procedure</h2>
+            <h3>Step 1: Setup and Data Creation</h3>
+            <div class="code-block"><pre>import pandas as pd, numpy as np, matplotlib.pyplot as plt, seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix</pre></div>
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-             <h3>Step 2: Create and Explore the Data</h3>
-             <p>Instead of loading a file, we'll generate our own data. This gives us full control and understanding.</p>
-             <div class="code-block"><pre># Generate synthetic customer data
+# Generate synthetic customer data
 np.random.seed(42)
 n_samples = 500
 tenure = np.random.randint(1, 73, n_samples)
 monthly_charges = np.random.uniform(20, 120, n_samples)
-total_charges = tenure * monthly_charges + np.random.normal(0, 100, n_samples)
-churn = np.where( (tenure < 12) & (monthly_charges > 70), 1, 
-                  np.where( (tenure < 24) & (monthly_charges > 50), np.random.choice([0,1], p=[0.7, 0.3]), 0) )
+churn = np.where((tenure < 12) & (monthly_charges > 70), 1, 0)
+df = pd.DataFrame({'tenure': tenure, 'monthly_charges': monthly_charges, 'churn': churn})
+</pre></div>
+            <h3>Step 2: Preprocessing, Training, and Evaluation</h3>
+            <div class="code-block"><pre>X = df[['tenure', 'monthly_charges']]
+y = df['churn']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-df = pd.DataFrame({
-    'tenure': tenure,
-    'monthly_charges': monthly_charges,
-    'total_charges': total_charges,
-    'churn': churn
-})
-
-# Introduce some missing values to make it realistic
-df.loc[df.sample(frac=0.05).index, 'total_charges'] = np.nan
-
-print("Data Head:")
-print(df.head())
-print("\nData Info:")
-df.info()</pre></div>
-             <p><strong>Question:</strong> What do you notice about the data types? How many missing values are there in `total_charges`?</p>
-
-             <h3>Step 3: Data Preprocessing and Cleaning</h3>
-             <p>Real-world data is often messy. Let's fill the missing `total_charges` with the median value of the column.</p>
-             <div class="code-block"><pre># Fill missing values
-median_total_charges = df['total_charges'].median()
-df['total_charges'].fillna(median_total_charges, inplace=True)
-
-print("\nMissing values after cleaning:")
-print(df.isnull().sum())</pre></div>
-
-             <h3>Step 4: Define Features (X) and Target (y)</h3>
-             <p>Separate the data into features (the inputs) and the target (what we want to predict).</p>
-             <div class="code-block"><pre>X = df[['tenure', 'monthly_charges', 'total_charges']]
-y = df['churn']</pre></div>
-
-             <h3>Step 5: Split Data and Scale Features</h3>
-             <p>Split the data into training and testing sets, then apply feature scaling—a critical step for k-NN.</p>
-             <div class="code-block"><pre># Split the data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
-
-# Scale the features
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-print("Data split and scaled successfully.")</pre></div>
-
-             <h3>Step 6: Train the k-NN Model</h3>
-             <p>Now, train the k-NN classifier on the scaled training data. We'll start with k=7.</p>
-             <div class="code-block"><pre># Train the model
 knn = KNeighborsClassifier(n_neighbors=7)
 knn.fit(X_train_scaled, y_train)
-
-print("k-NN model trained with k=7.")</pre></div>
-
-             <h3>Step 7: Evaluate the Model</h3>
-             <p>Make predictions on the unseen test data and evaluate the model's performance.</p>
-             <div class="code-block"><pre># Make predictions
 y_pred = knn.predict(X_test_scaled)
 
-# Calculate accuracy
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Model Accuracy: {accuracy:.4f}\n")
-
-# Display the classification report
-print("Classification Report:")
-print(classification_report(y_test, y_pred, target_names=['No Churn', 'Churn']))
-
-# Display the confusion matrix
-cm = confusion_matrix(y_test, y_pred)
-plt.figure(figsize=(8, 6))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=['No Churn', 'Churn'], yticklabels=['No Churn', 'Churn'])
-plt.xlabel('Predicted')
-plt.ylabel('Actual')
-plt.title('Confusion Matrix')
-# In a real script, use plt.show() to display
+print(classification_report(y_test, y_pred))
+sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d')
+# plt.show() would be used here
 </pre></div>
-             
-             <h2>4. Model Performance Analysis</h2>
-             <p>Evaluating a classification model goes beyond simple accuracy. We need to understand the types of errors it makes and how well it identifies the classes we care about most.</p>
-             <ul>
-                 <li><strong>Overall Correctness:</strong> What is the model's accuracy? Why might this single number not tell the whole story, especially if one group (e.g., non-churners) is much larger than the other?</li>
-                 <li><strong>Detailed Performance Metrics:</strong> Examine the classification report. What do the precision and recall scores for the "Churn" class suggest about the model's effectiveness in identifying at-risk customers?</li>
-                 <li><strong>Error Analysis:</strong> Look at the confusion matrix. How many actual churners did the model correctly identify (True Positives)? How many non-churners did it incorrectly flag as potential churners (False Positives)?</li>
-             </ul>
-
-             <h2>5. Hyperparameter Tuning</h2>
-             <p>The performance of many machine learning models is sensitive to their configuration settings, known as hyperparameters. For k-NN, the most important hyperparameter is 'k' itself. We can find a better value for 'k' by systematically testing a range of options.</p>
-             <div class="code-block"><pre>k_range = range(1, 26)
+            <h2>4. Hyperparameter Tuning</h2>
+            <p>Find the best value for 'k' by testing a range of options and plotting their accuracies.</p>
+            <div class="code-block"><pre>k_range = range(1, 26)
 accuracies = []
-
 for k in k_range:
     knn_loop = KNeighborsClassifier(n_neighbors=k)
     knn_loop.fit(X_train_scaled, y_train)
-    y_pred_loop = knn_loop.predict(X_test_scaled)
-    accuracies.append(accuracy_score(y_test, y_pred_loop))
+    accuracies.append(accuracy_score(y_test, knn_loop.predict(X_test_scaled)))
 
-# Plot the results
-plt.figure(figsize=(12, 6))
-plt.plot(k_range, accuracies, marker='o', linestyle='dashed')
-plt.title('Model Accuracy vs. K Value')
-plt.xlabel('K Value')
-plt.ylabel('Accuracy')
-plt.xticks(k_range)
-plt.grid(True)
-# In a real script, use plt.show() to display
+plt.plot(k_range, accuracies, marker='o')
+# plt.show() would be used here
 </pre></div>
-             <p><strong>Challenge:</strong> By observing the generated plot, what value of 'k' provides the highest accuracy? How does the model's performance change as 'k' varies?</p>
+            <p><strong>Challenge:</strong> By observing the plot, what value of 'k' provides the highest accuracy?</p>
+        </div>
+        
+        <!-- Page 12: Advanced Exercises -->
+        <div id="advanced-exercise" class="page">
+            <h1>Advanced Application Exercises & Solutions</h1>
+            
+            <h2>Challenge 1: Predictive Maintenance with Boosting</h2>
+            <div class="card" style="margin-top: 2rem;">
+                <p><strong>Scenario:</strong> A factory wants to predict equipment failure based on sensor data (temperature, vibration, pressure). The dataset is imbalanced, with few failure events.</p>
+                <p><strong>Tasks:</strong> Build a `GradientBoostingClassifier`, tune it with `GridSearchCV`, and evaluate using precision, recall, and F1-score.</p>
+            </div>
+            <button class="accordion-button">Show/Hide Solution for Challenge 1</button>
+            <div class="accordion-panel">
+                <h3>Solution Walkthrough</h3>
+                <p>First, we import libraries and create a synthetic imbalanced dataset where 'failure' (class 1) is rare.</p>
+                <div class="code-block"><pre>from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import classification_report
+from sklearn.datasets import make_classification
 
+# 1. Create an imbalanced dataset
+X, y = make_classification(n_samples=1000, n_features=10, n_informative=5,
+                           n_redundant=0, n_classes=2, n_clusters_per_class=1,
+                           weights=[0.95, 0.05], flip_y=0, random_state=42)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
+</pre></div>
+                <p>Next, we define the parameter grid for `GridSearchCV` and run the search.</p>
+                <div class="code-block"><pre># 2. Set up GridSearchCV
+param_grid = {
+    'n_estimators': [100, 150],
+    'learning_rate': [0.05, 0.1],
+    'max_depth': [3, 4]
+}
+gb_clf = GradientBoostingClassifier(random_state=42)
+grid_search = GridSearchCV(estimator=gb_clf, param_grid=param_grid, cv=3, scoring='f1', n_jobs=-1)
+grid_search.fit(X_train, y_train)
+
+print(f"Best Parameters: {grid_search.best_params_}")
+</pre></div>
+                <p>Finally, we evaluate the best model found by the grid search.</p>
+                 <div class="code-block"><pre># 3. Evaluate the best model
+best_model = grid_search.best_estimator_
+y_pred = best_model.predict(X_test)
+
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred, target_names=['No Failure', 'Failure']))
+</pre></div>
+                <h3>Why Precision/Recall over Accuracy?</h3>
+                <p>In an imbalanced dataset like this (e.g., 95% 'No Failure', 5% 'Failure'), a lazy model could predict 'No Failure' every time and achieve 95% accuracy. This model would be useless because it never identifies the events we care about. <strong>Precision</strong> and <strong>Recall</strong> for the 'Failure' class tell us how good the model is at its real job: identifying failures correctly without raising too many false alarms.</p>
+            </div>
+
+            <h2 style="margin-top: 3rem;">Challenge 2: Image Classification with a Neural Network</h2>
+            <div class="card" style="margin-top: 2rem;">
+                <p><strong>Scenario:</strong> Classify images from the CIFAR-10 dataset using a Convolutional Neural Network (CNN).</p>
+                <p><strong>Tasks:</strong> Preprocess the data, build a CNN with TensorFlow/Keras, compile and train it, and analyze the training plots for overfitting.</p>
+            </div>
+            <button class="accordion-button">Show/Hide Solution for Challenge 2</button>
+            <div class="accordion-panel">
+                <h3>Solution Walkthrough</h3>
+                <p>First, we load the CIFAR-10 dataset and preprocess it.</p>
+                <div class="code-block"><pre>import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+import matplotlib.pyplot as plt
+
+# 1. Load and preprocess data
+(X_train, y_train), (X_test, y_test) = keras.datasets.cifar10.load_data()
+
+# Scale pixel values to be between 0 and 1
+X_train = X_train.astype("float32") / 255.0
+X_test = X_test.astype("float32") / 255.0
+
+# One-hot encode the labels
+y_train = keras.utils.to_categorical(y_train, 10)
+y_test = keras.utils.to_categorical(y_test, 10)
+</pre></div>
+                <p>Next, we define, compile, and train our CNN model.</p>
+                <div class="code-block"><pre># 2. Build and compile the CNN model
+model = keras.Sequential([
+    keras.Input(shape=(32, 32, 3)),
+    layers.Conv2D(32, kernel_size=(3, 3), activation="relu"),
+    layers.MaxPooling2D(pool_size=(2, 2)),
+    layers.Conv2D(64, kernel_size=(3, 3), activation="relu"),
+    layers.MaxPooling2D(pool_size=(2, 2)),
+    layers.Flatten(),
+    layers.Dropout(0.5),
+    layers.Dense(10, activation="softmax"),
+])
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+# 3. Train the model
+history = model.fit(X_train, y_train, batch_size=64, epochs=15, validation_split=0.1)
+</pre></div>
+            <h3>Analyzing for Overfitting</h3>
+            <p>We plot the training and validation accuracy/loss. <strong>Overfitting</strong> occurs when the model performs well on training data but poorly on validation data. We would see the training accuracy continuing to rise while validation accuracy flattens or drops. The gap between the training loss (decreasing) and validation loss (increasing) is the key indicator.</p>
+            <div class="code-block"><pre># 4. Plot history to check for overfitting
+plt.figure(figsize=(12, 5))
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'], label='Training Accuracy')
+plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+plt.legend()
+plt.title('Accuracy Over Epochs')
+
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.legend()
+plt.title('Loss Over Epochs')
+# plt.show()
+</pre></div>
+            </div>
         </div>
 
     </main>
 
-    <!-- The Modal -->
-    <div id="login-modal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h2>Login</h2>
-        <form onsubmit="event.preventDefault();">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="you@example.com" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="••••••••" required>
-          </div>
-          <button type="submit" class="cta-button">Login</button>
-          <button type="button" class="secondary-button" id="signup-btn">Sign Up</button>
-        </form>
-      </div>
-    </div>
-
     <script>
-        // Modal Logic
-        const loginModal = document.getElementById('login-modal');
-        const loginBtn = document.getElementById('login-btn');
-        const closeBtn = document.querySelector('.close-btn');
-
-        // Show modal when login button is clicked
-        if (loginBtn) {
-            loginBtn.onclick = function() {
-                loginModal.style.display = "block";
-            }
-        }
-
-        // Hide modal when close button is clicked
-        if (closeBtn) {
-            closeBtn.onclick = function() {
-                loginModal.style.display = "none";
-            }
-        }
-
-        // Hide modal when user clicks outside of it
-        window.onclick = function(event) {
-            if (event.target == loginModal) {
-                loginModal.style.display = "none";
-            }
-        }
-        
         // Page switching logic
         function showPage(pageId, element) {
-            // Hide all pages
             const pages = document.querySelectorAll('.page');
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
-
-            // Show the selected page
+            pages.forEach(page => page.classList.remove('active'));
             const activePage = document.getElementById(pageId);
-            if (activePage) {
-                activePage.classList.add('active');
-            }
+            if (activePage) activePage.classList.add('active');
             
-            // Update active link in navigation
             const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
+            navLinks.forEach(link => link.classList.remove('active'));
             
-            // Find the correct link to activate
             const correspondingLink = document.querySelector(`.nav-links a[onclick*="'${pageId}'"]`);
             if (correspondingLink) {
                 correspondingLink.classList.add('active');
@@ -857,13 +752,25 @@ plt.grid(True)
                 element.classList.add('active');
             }
 
-
-            // Scroll to the top of the main content area
             window.scrollTo({
-                top: document.querySelector('main').offsetTop - 80, // Adjust for sticky header
+                top: document.querySelector('main').offsetTop - 80,
                 behavior: 'smooth'
             });
         }
+
+        // Accordion logic
+        const accordions = document.querySelectorAll('.accordion-button');
+        accordions.forEach(acc => {
+            acc.addEventListener("click", function() {
+                this.classList.toggle("active");
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+            });
+        });
     </script>
 </body>
 </html>
